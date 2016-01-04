@@ -8,7 +8,10 @@ Verder worden er natuurlijk filters gemaakt waardoor gebruikers bijvoorbeeld kun
 ## A preliminary sketch of what the application will look like
 Nog niet nagedacht te hebben over een lay out kan er worden gesteld dat de volgende visualisaties soorten er aan toegevoegd gaan worden. Uiteraard in een nette HTML-pagina zodat het een eenheid en rust creeërt.
 
-![](doc/image001.png)
+![](doc/img001.png)
+![](doc/img002.png)
+![](doc/img003.png)
+![](doc/img004.png)
 
 ## What data sets and data sources will you need, how you will get the data into the right form for your app?
 Het meest gemakkelijke, en in mijn ogen een snelle manier is het gebruik van een database waar alle informatie in staat die er nodig is. Onderling is het gemakkelijk verschillende tabellen aan elkaar te koppelen en deze in een browser op te halen. Als de data uit de database is gehaald kan het worden toegeschreven aan variabelen, zowel als PHP, JS is dat gemakkelijk te doen. Als de waardes in JS zijn kan er gemakkelijk mee worden gewerkt door de D3 library. Door middel van JS is het gemakkelijk aan te geven welke data er wel en niet zichtbaar gemaakt moet worden om zo bijvoorbeeld views of filters te maken.
