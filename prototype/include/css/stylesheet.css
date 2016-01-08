@@ -86,7 +86,7 @@ table,tr,td,* {
 	font-size:20px;
 	top: 390px;	
     height: 70px;
-	width:989px;
+	width:1280px;
     background: -webkit-linear-gradient(#9fd83d, #25CCFF); /* For Safari 5.1 to 6.0 */
     background: -o-linear-gradient(#9fd83d, #25CCFF); /* For Opera 11.1 to 12.0 */
     background: -moz-linear-gradient(#9fd83d, #25CCFF); /* For Firefox 3.6 to 15 */
@@ -103,7 +103,7 @@ table,tr,td,* {
     top: -370px;
     float: left;
     position: relative;
-    left: 17%;
+    left: 26%;
 }
 
 ul {
@@ -136,7 +136,7 @@ ul li a{
 	color:#f9f9f9!important;
 	font-weight:100;	
 	padding: 25px 17px;
-	text-shadow: 1px 1px #4e9540;
+	text-shadow: 1px 1px #262626;
 }
 
 .slideContainer{
