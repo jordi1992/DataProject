@@ -278,3 +278,8 @@ path {
 .path_models_Ford {
     stroke:red;
 }
+
+.hoverinfo {
+	color:#262626;
+	text-align: center;
+}

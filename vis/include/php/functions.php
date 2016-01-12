@@ -1,23 +1,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
 <script>
 window.onload = function() {
-	var year = <?php echo json_encode($year) ?>;
+	var make_id = <?php echo json_encode($make_id) ?>;
 	var make = <?php echo  (json_encode($make)) ?>;
-	var model = <?php echo (json_encode($model)) ?>;
+	var model = <?php echo  (json_encode($model)) ?>;
+	var model_id = <?php echo (json_encode($model_id)) ?>;
+	var current = null;
+    var cnt = 0;
 	var dataset = [];
-	var nameset = []
 	make.sort();
 
-	for(var x=0; x<year.length; x++){
-	};
-	
-	var current = null;
-	var cnt = 0;
     for (var i = 0; i < make.length; i++) {
         if (make[i] != current) {
             if (cnt > 0) {
-                dataset.push(cnt);
-                nameset.push(current);
+                console.log(current + " has been found");
+                dataset.push(current);
             }
             current = make[i];
             cnt = 1;
@@ -26,192 +23,295 @@ window.onload = function() {
         }
     }
     if (cnt > 0) {
-         dataset.push(cnt);
-         nameset.push(current);
+        console.log(current + " has been found");
+        dataset.push(current);
     }
-	
-   var data = [{
-    "year": 1904,
-    "models_VW": 1,
-    "models_Ford": 11
-	}, {
-    "year": 1915,
-    "models_VW": 2,
-    "models_Ford": 21
-	}, {
-    "year": 1920,
-    "models_VW": 3,
-    "models_Ford": 31
-	}, {
-    "year": 1925,
-    "models_VW": 4,
-    "models_Ford": 41
-	}, {
-    "year": 1930,
-    "models_VW": 12,
-    "models_Ford": 51
-	}, {
-    "year": 1935,
-    "models_VW": 22,
-    "models_Ford": 61
-	}, {
-    "year": 1940,
-    "models_VW": 24,
-    "models_Ford": 111
-	}, {
-    "year": 1945,
-    "models_VW": 33,
-    "models_Ford": 180
-	}, {
-    "year": 1950,
-    "models_VW": 35,
-    "models_Ford": 240
-	}, {
-    "year": 1960,
-    "models_VW": 39,
-    "models_Ford": 350    
-	}, {
-    "year": 2013,
-    "models_VW": 120,
-    "models_Ford": 648
-}];
-                   
-var margin = {
-    top: 10,
-    right: 20,
-    bottom: 100,
-    left: 40
-},
-margin2 = {
-    top: 630,
-    right: 20,
-    bottom: 20,
-    left: 40
-},
-width = 920 - margin.left - margin.right,
-    height = 700 - margin.top - margin.bottom,
-    height2 = 700 - margin2.top - margin2.bottom;
-
-var x = d3.scale.linear().range([0, width]),
-    x2 = d3.scale.linear().range([0, width]),
-    y = d3.scale.linear().range([height, 0]),
-    y2 = d3.scale.linear().range([height2, 0]);
-
-var color = d3.scale.ordinal()
-
-var xAxis = d3.svg.axis().scale(x).orient("bottom"),
-    xAxis2 = d3.svg.axis().scale(x2).orient("bottom"),
-    yAxis = d3.svg.axis().scale(y).orient("left");
-
-var brush = d3.svg.brush()
-    .x(x2)
-    .on("brush", brushed);
 
 
-var area = function (Concent) {
-    return d3.svg.area()
-        .interpolate("path")
-        .x(function (d) {
-        return x(d.year);
-    })
-        .y0(height)
-        .y1(function (d) {
-        return y(d[Concent]);
-    });
-};
-var area2 = function (Concent) {
-    return d3.svg.area()
-        .interpolate("path")
-        .x(function (d) {
-        return x2(d.year);
-    })
-        .y0(height2)
-        .y1(function (d) {
-        return y2(d[Concent]);
-    });
-};
-	var xAxis = d3.svg.axis().scale(x).orient("bottom").tickFormat(d3.format("d"));
-
-	var svg = d3.select(".content").append("svg")
-	    .attr("width", width + margin.left + margin.right)
-	    .attr("height", height + margin.top + margin.bottom);
-
-	svg.append("defs").append("clipPath")
-	    .attr("id", "clip")
-	    .append("rect")
-	    .attr("width", width)
-	    .attr("height", height);
-
-	var focus = svg.append("g")
-	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-	var context = svg.append("g")
-	    .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
-
-	    color.domain(d3.keys(data[0]).filter(function (key) {
-	        return key !== "year";
-	    }));
-
-	    x.domain(d3.extent(data.map(function (d) {
-	        return d.year;
-	    })));
-	    y.domain([0, d3.max(data.map(function (d) {
-	        return d.models_Ford+52;
-	    }))]);
-	    x2.domain(x.domain());
-	    y2.domain(y.domain());
-
-	    focus.selectAll('path')
-	        .data(['models_VW', 'models_Ford'])
-	        .enter()
-	        .append('path')
-	        .attr('clip-path', 'url(#clip)')
-	        .attr('d', function (col) {
-	        return area(col)(data);
-	    })
-	        .attr('class', function (col) {
-	        return "path_" + col + " data";
-	    });
-
-	    focus.append("g")
-	        .attr("class", "x axis")
-	        .attr("transform", "translate(0," + height + ")")
-	        .call(xAxis);
-
-	    focus.append("g")
-	        .attr("class", "y axis")
-	        .call(yAxis);
-
-	    context.selectAll('path')
-	        .data(['models_VW', 'models_Ford'])
-	        .enter()
-	        .append('path')
-	        .attr('d', function (col) {
-	        return area2(col)(data);
-	    })
-	        .attr('class', function (col) {
-	        return "path_" + col;
-	    });
-
-	    context.append("g")
-	        .attr("class", "x axis")
-	        .attr("transform", "translate(0," + height2 + ")")
-	        .call(xAxis2);
+    var germany = [];
+    var netherlands = [];
 
 
-	    context.append("g")
-	        .attr("class", "x brush")
-	        .call(brush)
-	        .selectAll("rect")
-	        .attr("y", -6)
-	        .attr("height", height2 + 7);
+	for (var x = 0; x < dataset.length; x++) {
+	   	if(dataset[x] == "Volkswagen" || dataset[x] == "Opel" || dataset[x] == "BMW" || dataset[x] == "Mercedes Benz" || dataset[x] == "Porsche"){
+	   		germany.push(dataset[x]);
+            germany.push("</br>")
+	   	}  if(dataset[x] == "Spyker"){
+            netherlands.push(dataset[x]);
+            netherlands.push("</br>")
 
-	    function brushed() {
-	        x.domain(brush.empty() ? x2.domain() : brush.extent());
-	        focus.selectAll("path.data").attr("d", function (col) {
-	            return area(col)(data);
-	        });
-	        focus.select(".x.axis").call(xAxis);
-	    }
+	}
+}
+
+    console.log(germany);
+
+    var map = new Datamap({
+    scope: 'world',
+    element: document.getElementById('container1'),
+    projection: 'mercator',
+    height: 1200, 
+    geographyConfig: {
+      highlightBorderColor: 'steelblue',
+      highlightBorderWidth: 1,
+      popupTemplate: function (geo, data) {
+        if ( !data ) return;
+          return ['<div class="hoverinfo">','<h1>Names of the car makes in ' + geo.properties.name,'</h1>' + data.amount_makes, '</div>'].join('');
+        }
+    },
+    fills: {
+      defaultFill: 'gray',
+    }, data: {
+    'ABW': {amount_makes: '540224050'},
+    'AFG': {amount_makes: '4231455'},
+    'AGO': {amount_makes: '10294245'},
+    'AIA': {amount_makes: '88202044'},
+    'ALA': {amount_makes: '32411434'},
+    'ALB': {amount_makes: '111034242'},
+    'AND': {amount_makes: '3034242'},
+    'ARE': {amount_makes: '35234234'},
+    'ARG': {amount_makes: '54224050'},
+    'ARM': {amount_makes: '4231455'},
+    'ASM': {amount_makes: '10294245'},
+    'ATA': {amount_makes: '88202044'},
+    'ATF': {amount_makes: '32411434'},
+    'ATG': {amount_makes: '111034242'},
+    'AUS': {amount_makes: '3034242'},
+    'AUT': {amount_makes: '35234234'},
+    'AZE': {amount_makes: '540224050'},
+    'BDI': {amount_makes: '4231455'},
+    'BEL': {amount_makes: '10294245'},
+    'BEN': {amount_makes: '88202044'},
+    'BES': {amount_makes: '32411434'},
+    'BFA': {amount_makes: '111034242'},
+    'BGD': {amount_makes: '3034242'},
+    'BGR': {amount_makes: '35234234'},
+    'BHR': {amount_makes: '540224050'},
+    'BHS': {amount_makes: '4231455'},
+    'BIH': {amount_makes: '10294245'},
+    'BLM': {amount_makes: '88202044'},
+    'BLR': {amount_makes: '32411434'},
+    'BLZ': {amount_makes: '111034242'},
+    'BMU': {amount_makes: '3034242'},
+    'BOL': {amount_makes: '35234234'},
+    'BRA': {amount_makes: '540224050'},
+    'BRB': {amount_makes: '4231455'},
+    'BRN': {amount_makes: '10294245'},
+    'BTN': {amount_makes: '88202044'},
+    'BVT': {amount_makes: '32411434'},
+    'BWA': {amount_makes: '111034242'},
+    'CAF': {amount_makes: '3034242'},
+    'CAN': {amount_makes: '35234234'},
+    'CCK': {amount_makes: '540224050'},
+    'CHE': {amount_makes: '4231455'},
+    'CHL': {amount_makes: '10294245'},
+    'CHN': {amount_makes: '1300000000'},
+    'CIV': {amount_makes: '32411434'},
+    'CMR': {amount_makes: '111034242'},
+    'COD': {amount_makes: '3034242'},
+    'COG': {amount_makes: '35234234'},
+    'COK': {amount_makes: '540224050'},
+    'COL': {amount_makes: '4231455'},
+    'COM': {amount_makes: '10294245'},
+    'CPV': {amount_makes: '88202044'},
+    'CRI': {amount_makes: '32411434'},
+    'CUB': {amount_makes: '111034242'},
+    'CUW': {amount_makes: '3034242'},
+    'CXR': {amount_makes: '35234234'},
+    'CYM': {amount_makes: '540224050'},
+    'CYB': {amount_makes: '4231455'},
+    'CZE': {amount_makes: '10294245'},
+    'DEU': {amount_makes: germany},
+    'DJI': {amount_makes: '32411434'},
+    'DMA': {amount_makes: '111034242'},
+    'DNK': {amount_makes: '3034242'},
+    'DOM': {amount_makes: '35234234'},
+    'DZA': {amount_makes: '540224050'},
+    'ECU': {amount_makes: '4231455'},
+    'EGY': {amount_makes: '10294245'},
+    'ERI': {amount_makes: '88202044'},
+    'ESH': {amount_makes: '32411434'},
+    'ESP': {amount_makes: '111034242'},
+    'EST': {amount_makes: '3034242'},
+    'ETH': {amount_makes: '35234234'},
+    'FIN': {amount_makes: '540224050'},
+    'FJI': {amount_makes: '4231455'},
+    'FLK': {amount_makes: '10294245'},
+    'FRA': {amount_makes: '88202044'},
+    'FRO': {amount_makes: '32411434'},
+    'FSM': {amount_makes: '111034242'},
+    'GAB': {amount_makes: '3034242'},
+    'GBR': {amount_makes: '35234234'},
+    'GEO': {amount_makes: '540224050'},
+    'GGY': {amount_makes: '4231455'},
+    'GHA': {amount_makes: '10294245'},
+    'GIB': {amount_makes: '88202044'},
+    'GIN': {amount_makes: '32411434'},
+    'GLP': {amount_makes: '111034242'},
+    'GMB': {amount_makes: '3034242'},
+    'GNB': {amount_makes: '35234234'},
+    'GNQ': {amount_makes: '540224050'},
+    'GRC': {amount_makes: '4231455'},
+    'GRD': {amount_makes: '10294245'},
+    'GRL': {amount_makes: '88202044'},
+    'GTM': {amount_makes: '32411434'},
+    'GUF': {amount_makes: '111034242'},
+    'GUM': {amount_makes: '3034242'},
+    'GUY': {amount_makes: '35234234'},
+    'HKG': {amount_makes: '540224050'},
+    'HMD': {amount_makes: '4231455'},
+    'HND': {amount_makes: '10294245'},
+    'HRV': {amount_makes: '88202044'},
+    'HTI': {amount_makes: '32411434'},
+    'HUN': {amount_makes: '111034242'},
+    'IDN': {amount_makes: '3034242'},
+    'IMN': {amount_makes: '35234234'},
+    'IND': {amount_makes: '1100000000'},
+    'IOT': {amount_makes: '4231455'},
+    'IRL': {amount_makes: '10294245'},
+    'IRN': {amount_makes: '88202044'},
+    'IRQ': {amount_makes: '32411434'},
+    'ISL': {amount_makes: '111034242'},
+    'ISR': {amount_makes: '3034242'},
+    'ITA': {amount_makes: '35234234'},
+    'JAM': {amount_makes: '540224050'},
+    'JEY': {amount_makes: '4231455'},
+    'JOR': {amount_makes: '10294245'},
+    'JPN': {amount_makes: '88202044'},
+    'KAZ': {amount_makes: '32411434'},
+    'KEN': {amount_makes: '111034242'},
+    'KGZ': {amount_makes: '3034242'},
+    'KHM': {amount_makes: '35234234'},
+    'KIR': {amount_makes: '540224050'},
+    'KNA': {amount_makes: '4231455'},
+    'KOR': {amount_makes: '10294245'},
+    'KWT': {amount_makes: '88202044'},
+    'LAO': {amount_makes: '32411434'},
+    'LBN': {amount_makes: '111034242'},
+    'LBR': {amount_makes: '3034242'},
+    'LBY': {amount_makes: '35234234'},
+    'LCA': {amount_makes: '540224050'},
+    'LIE': {amount_makes: '4231455'},
+    'LKA': {amount_makes: '10294245'},
+    'LSO': {amount_makes: '88202044'},
+    'LTU': {amount_makes: '32411434'},
+    'LUX': {amount_makes: '111034242'},
+    'LVA': {amount_makes: '3034242'},
+    'MAC': {amount_makes: '35234234'},
+    'MAF': {amount_makes: '540224050'},
+    'MAR': {amount_makes: '4231455'},
+    'MCO': {amount_makes: '10294245'},
+    'MDA': {amount_makes: '88202044'},
+    'MDG': {amount_makes: '32411434'},
+    'MDV': {amount_makes: '111034242'},
+    'MEX': {amount_makes: '3034242'},
+    'MHL': {amount_makes: '35234234'},
+    'MKD': {amount_makes: '540224050'},
+    'MLI': {amount_makes: '4231455'},
+    'MLT': {amount_makes: '10294245'},
+    'MMR': {amount_makes: '88202044'},
+    'MNE': {amount_makes: '32411434'},
+    'MNG': {amount_makes: '111034242'},
+    'MNB': {amount_makes: '3034242'},
+    'MOZ': {amount_makes: '35234234'},
+    'MRT': {amount_makes: '540224050'},
+    'MSR': {amount_makes: '4231455'},
+    'MTQ': {amount_makes: '10294245'},
+    'MUS': {amount_makes: '88202044'},
+    'MWI': {amount_makes: '32411434'},
+    'MYS': {amount_makes: '111034242'},
+    'MYT': {amount_makes: '3034242'},
+    'NAM': {amount_makes: '35234234'},
+    'NCL': {amount_makes: '540224050'},
+    'NER': {amount_makes: '4231455'},
+    'NFK': {amount_makes: '10294245'},
+    'NGA': {amount_makes: '88202044'},
+    'NIC': {amount_makes: '32411434'},
+    'NIU': {amount_makes: '111034242'},
+    'NLD': {amount_makes: netherlands},
+    'NOR': {amount_makes: '35234234'},
+    'NPL': {amount_makes: '540224050'},
+    'NRU': {amount_makes: '4231455'},
+    'NZL': {amount_makes: '10294245'},
+    'OMN': {amount_makes: '88202044'},
+    'PAK': {amount_makes: '32411434'},
+    'PAN': {amount_makes: '111034242'},
+    'PCN': {amount_makes: '3034242'},
+    'PER': {amount_makes: '35234234'},
+    'PHL': {amount_makes: '540224050'},
+    'PLB': {amount_makes: '4231455'},
+    'PNG': {amount_makes: '10294245'},
+    'POL': {amount_makes: '88202044'},
+    'PRI': {amount_makes: '32411434'},
+    'PRK': {amount_makes: '111034242'},
+    'PRT': {amount_makes: '3034242'},
+    'PRY': {amount_makes: '35234234'},
+    'PSE': {amount_makes: '540224050'},
+    'PYF': {amount_makes: '4231455'},
+    'QAT': {amount_makes: '10294245'},
+    'REU': {amount_makes: '88202044'},
+    'ROU': {amount_makes: '32411434'},
+    'RUS': {amount_makes: '111034242'},
+    'RWA': {amount_makes: '3034242'},
+    'SAU': {amount_makes: '35234234'},
+    'SDN': {amount_makes: '540224050'},
+    'SEN': {amount_makes: '4231455'},
+    'SGT': {amount_makes: '10294245'},
+    'SGS': {amount_makes: '88202044'},
+    'SHN': {amount_makes: '32411434'},
+    'SJM': {amount_makes: '111034242'},
+    'SLB': {amount_makes: '3034242'},
+    'SLE': {amount_makes: '35234234'},
+    'SLV': {amount_makes: '540224050'},
+    'SMR': {amount_makes: '4231455'},
+    'SOM': {amount_makes: '10294245'},
+    'SPM': {amount_makes: '88202044'},
+    'SRB': {amount_makes: '32411434'},
+    'SSD': {amount_makes: '111034242'},
+    'STP': {amount_makes: '3034242'},
+    'SUR': {amount_makes: '35234234'},
+    'SVK': {amount_makes: '540224050'},
+    'SVN': {amount_makes: '4231455'},
+    'SWE': {amount_makes: '10294245'},
+    'SWZ': {amount_makes: '88202044'},
+    'SXM': {amount_makes: '32411434'},
+    'SYC': {amount_makes: '111034242'},
+    'SYR': {amount_makes: '3034242'},
+    'TCA': {amount_makes: '35234234'},
+    'TCD': {amount_makes: '540224050'},
+    'TGO': {amount_makes: '4231455'},
+    'THA': {amount_makes: '10294245'},
+    'TJK': {amount_makes: '88202044'},
+    'TKL': {amount_makes: '32411434'},
+    'TKM': {amount_makes: '111034242'},
+    'TLS': {amount_makes: '3034242'},
+    'TOM': {amount_makes: '35234234'},
+    'TTO': {amount_makes: '540224050'},
+    'TUM': {amount_makes: '4231455'},
+    'TUR': {amount_makes: '10294245'},
+    'TUV': {amount_makes: '88202044'},
+    'TWN': {amount_makes: '32411434'},
+    'TZA': {amount_makes: '111034242'},
+    'UGA': {amount_makes: '3034242'},
+    'UKR': {amount_makes: '35234234'},
+    'UMI': {amount_makes: '540224050'},
+    'URY': {amount_makes: '4231455'},
+    'USA': {amount_makes: '10294245'},
+    'UZB': {amount_makes: '88202044'},
+    'VAT': {amount_makes: '32411434'},
+    'VCT': {amount_makes: '111034242'},
+    'VEN': {amount_makes: '3034242'},
+    'VGB': {amount_makes: '35234234'},
+    'VIR': {amount_makes: '540224050'},
+    'VNM': {amount_makes: '4231455'},
+    'VUT': {amount_makes: '10294245'},
+    'WLF': {amount_makes: '88202044'},
+    'WSM': {amount_makes: '32411434'},
+    'YEM': {amount_makes: '111034242'},
+    'ZAF': {amount_makes: '3034242'},
+    'ZMB': {amount_makes: '35234234'},
+    'ZWE': {amount_makes: '540224050'}
+    }
+  })
+
 }
 </script>

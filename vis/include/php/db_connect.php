@@ -3,7 +3,7 @@
 $host        =    'localhost';
 $user        =    'root';
 $password    =    '';
-$database    =    'cars';
+$database    =    'models';
 
 error_reporting(0);
 
