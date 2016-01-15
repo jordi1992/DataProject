@@ -22,7 +22,7 @@ html{
 
 h1 {
 	font-family: 'arial';
-	font-size:18px;
+	font-size:22px;
 	color:#25CCFF!important;
 	font-weight:100;
 	margin-bottom: 10px;
@@ -103,7 +103,7 @@ table,tr,td,* {
     top: -370px;
     float: left;
     position: relative;
-    left: 17%;
+    left: 40%;
 }
 
 ul {
@@ -139,14 +139,6 @@ ul li a{
 	text-shadow: 1px 1px #4e9540;
 }
 
-.slideContainer{
-	position: relative;
-	top:50px;
-	background-color:#f9f9f9;
-	float: left;
-	width: 100%;
-}
-
 .content{
 	float:left;
 	position:relative;
@@ -156,11 +148,6 @@ ul li a{
 	z-index:100;
 	padding: 30px;
 	top: 14px;
-}
-
-.shakevdweek img{
-	width:400px;
-	
 }
 
 .bottom{
@@ -282,4 +269,25 @@ path {
 .hoverinfo {
 	color:#262626;
 	text-align: center;
+}
+
+.link {
+  fill: none;
+  stroke: #666;
+  stroke-width: 2px;
+}
+
+.node circle {
+  fill: steelblue;
+  stroke: #fff;
+  stroke-width: 2px;
+}
+
+text {
+  font: 11px sans-serif;
+  pointer-events: none;
+}
+
+#network{
+	float: right;
 }
