@@ -1,0 +1,474 @@
+*{
+	margin-top: 0; padding: 0;  -webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	text-rendering: optimizeLegibility !important;
+	-webkit-font-smoothing: antialiased !important;
+}
+
+html{
+	background-image: url("../images/background.jpg");
+	background-size:cover;
+	background-repeat: no-repeat;
+	z-index:-2;
+}
+
+.floatLeft{float: left;}
+.floatRight{float: right;}
+.floatNone{float: none;}
+.fullWidth{width: 100%;}
+.clearBoth{clear: both;}
+.right{margin-right:30px;}
+
+h1 {
+	font-family: 'arial';
+	font-size:22px;
+	color:#25CCFF!important;
+	font-weight:100;
+	margin-bottom: 10px;
+}
+h2{
+	font-family: 'arial';
+	font-size:13px;
+	color:#25CCFF!important;
+	font-weight:100;
+}
+
+p{font-family: 'arial';
+	font-size:13px;
+	color:#262626;
+	margin-bottom: 10px;
+	line-height: 22px;
+	margin-right:10px;
+}
+
+table,tr,td,* {
+    font-family: 'arial';
+	font-size:13px;
+	color:#262626;
+	line-height: 22px;  
+}
+.wrapper{
+	width: 989px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.contentWrapper{
+	float:left;
+	width: 530px;
+}
+.subWrapper{
+	float:right;
+	width: 394px;
+	padding-right:20px;
+	padding-left:20px;
+}
+
+.logo{
+	width:150px;
+	height:0px;
+	left:-330px;
+	position:relative;
+	top:-105px;
+	float:left;
+	z-index:19;
+}
+
+.logo img{
+ width:350px;
+ height:auto;
+	
+}
+
+#menu {
+	font-family: 'roboto_slabbold';
+	position:relative;
+	font-size:20px;
+	top: 390px;	
+    height: 70px;
+	width:989px;
+    background: -webkit-linear-gradient(#9fd83d, #25CCFF); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(#9fd83d, #25CCFF); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(#9fd83d, #25CCFF); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(#9fd83d, #25CCFF); /* Standard syntax (must be last) */
+	z-index:20;
+}
+.selected{
+	background-image: url("../images/menuHover.png");
+	color: white;
+
+}
+
+.first {
+    top: -370px;
+    float: left;
+    position: relative;
+    left: 40%;
+}
+
+ul {
+	
+	text-align: center;
+	display: inline;
+	margin: 0;
+	list-style: none;
+	margin-left:0px;
+	margin-top:-2px;
+	z-index:20;
+}
+
+ul li:hover{
+	top:-10px;
+}
+
+ul li {
+	float: left;
+	font-size: 20px;
+	display: inline-block;
+	position: relative;		
+	color:green;
+}
+
+ul li a{
+	float: left;
+	font-size: 19px;
+	text-decoration: none;
+	color:#f9f9f9!important;
+	font-weight:100;	
+	padding: 25px 17px;
+	text-shadow: 1px 1px #4e9540;
+}
+
+.content{
+	float:left;
+	position:relative;
+	width:100%;
+	background-color:#f9f9f9!important;
+	min-height:400px;
+	z-index:100;
+	padding: 30px;
+	top: 14px;
+}
+
+.bottom{
+	margin-bottom: 40px;
+
+}
+
+article {
+	font-family: 'arial';
+	font-size:13px;
+	font-weight:normal!important;
+	float:left;
+	color:#262626; 
+}
+
+
+#footer {
+	float:left;
+	width:100%;
+	height:50px;
+	font-family: 'arial'; 
+	background-color:#25CCFF;
+	margin-bottom:50px;
+}
+
+#rectangle {
+	width: 75px;
+	background-color:#25CCFF;
+	float: right;
+	font-family: 'arial'; 
+	color: white;
+	font-size: 13px;
+	padding: 4px 0;
+	text-align: center;
+	text-decoration: none;
+}
+
+.footercontent{
+	color: white; 
+	font-size: 11px;
+	margin-left:20px;
+	margin-top:20px;
+	font-family: 'arial'; 
+}
+
+.footerlink, a.footerlink {
+	font-size: 11px;
+	color: white;
+	text-decoration: none;
+	margin-top:-20px;
+}
+
+.chart div {
+  font: 10px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 5px;
+  margin: 1px;
+  color: white;
+}
+
+/*path {
+	stroke: steelblue;
+	stroke-width: 1;
+	fill: none;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+}
+.x.axis line {
+  stroke: lightgrey;
+}
+.x.axis .minor {
+  stroke-opacity: .5;
+}
+.x.axis path {
+  display: none;
+}
+.y.axis line, .y.axis path {
+  fill: none;
+  stroke: #000;
+}
+*/
+.axis path {
+    fill: none;
+    stroke: #777;
+    shape-rendering: crispEdges;
+}
+.axis text {
+    font-family: arial;
+    font-size: 13px;
+}
+
+svg {
+    font: 10px sans-serif;
+}
+path {
+    fill:none;
+    stroke:white;
+    stroke-width:2px;
+}
+.axis path, .axis line {
+    fill: none;
+    stroke: #262626;
+    shape-rendering: crispEdges;
+}
+.brush .extent {
+    fill-opacity: .125;
+    shape-rendering: crispEdges;
+}
+.path_Acura {
+    stroke:steelblue;
+}
+.path_Alfa-Romeo {
+    stroke:steelblue;
+}
+.path_Aston-Martin {
+    stroke:steelblue;
+}
+.path_Audi {
+    stroke:steelblue;
+}
+.path_Bentley {
+    stroke:steelblue;
+}
+.path_BMW {
+    stroke:steelblue;
+}
+.path_Bugatti {
+    stroke:steelblue;
+}
+.path_Buick {
+    stroke:steelblue;
+}
+.path_Cadillac {
+    stroke:steelblue;
+}
+.path_Chevrolet {
+    stroke:steelblue;
+}
+.path_Chrysler {
+    stroke:steelblue;
+}
+.path_Citroen {
+    stroke:steelblue;
+}
+.path_Daewoo {
+    stroke:steelblue;
+}
+.path_Daihatsu {
+    stroke:steelblue;
+}
+.path_Dodge {
+    stroke:steelblue;
+}
+.path_Ferrari {
+    stroke:steelblue;
+}
+.path_Fiat {
+    stroke:steelblue;
+}
+.path_Ford {
+    stroke:steelblue;
+}
+.path_GEO {
+    stroke:steelblue;
+}
+.path_GMC {
+    stroke:steelblue;
+}
+.path_Honda {
+    stroke:steelblue;
+}
+.path_Hummer {
+    stroke:steelblue;
+}
+.path_Hyundai {
+    stroke:steelblue;
+}
+.path_Infiniti {
+    stroke:steelblue;
+}
+.path_Jaguar {
+    stroke:steelblue;
+}
+.path_Jeep {
+    stroke:steelblue;
+}
+.path_Kia {
+    stroke:steelblue;
+}
+.path_Lamborghini {
+    stroke:steelblue;
+}
+.path_Land-Rover {
+    stroke:steelblue;
+}
+.path_Lexus {
+    stroke:steelblue;
+}
+.path_Lincoln {
+    stroke:steelblue;
+}
+.path_Lotus {
+    stroke:steelblue;
+}
+.path_Maserati {
+    stroke:steelblue;
+}
+.path_Mazda {
+    stroke:steelblue;
+}
+.path_Mercedes-Benz {
+    stroke:steelblue;
+}
+.path_Mercury {
+    stroke:steelblue;
+}
+.path_MG {
+    stroke:steelblue;
+}
+.path_Mini {
+    stroke:steelblue;
+}
+.path_Mitsubishi {
+    stroke:steelblue;
+}
+.path_Nissan {
+    stroke:steelblue;
+}
+.path_Oldsmobile {
+    stroke:steelblue;
+}
+.path_Peugeot {
+    stroke:steelblue;
+}
+.path_Plymouth {
+    stroke:steelblue;
+}
+.path_Pontiac {
+    stroke:steelblue;
+}
+.path_Porsche {
+    stroke:steelblue;
+}
+.path_Rambler {
+    stroke:steelblue;
+}
+.path_Renault {
+    stroke:steelblue;
+}
+.path_Rolls-Royce {
+    stroke:steelblue;
+}
+.path_Saab {
+    stroke:steelblue;
+}
+.path_Smart {
+    stroke:steelblue;
+}
+.path_Spyker {
+    stroke:steelblue;
+}
+.path_Spyker {
+    stroke:steelblue;
+}
+.path_Subaru {
+    stroke:steelblue;
+}
+.path_Suzuki {
+    stroke:steelblue;
+}
+.path_Tesla {
+    stroke:steelblue;
+}
+.path_Toyota {
+    stroke:steelblue;
+}
+.path_Volkswagen {
+    stroke:steelblue;
+}
+.path_Volvo {
+    stroke:steelblue;
+}
+
+.hoverinfo {
+	color:#262626;
+	text-align: center;
+/*	background-image: url("http://gmauthority.com/blog/wp-content/gallery/gm-5-3l-v8-ecotec3-l83-engine/gm-5-3l-v8-ecotec3-l83-engine-3.jpg");
+	background-size: cover;*/
+	
+}
+
+.link {
+  fill: none;
+  stroke: #666;
+  stroke-width: 2px;
+}
+
+.node circle {
+  fill: steelblue;
+  stroke: #fff;
+  stroke-width: 2px;
+}
+
+text {
+  font: 11px sans-serif;
+  pointer-events: none;
+}
+
+#network{
+	float: right;
+}
+
+#viz {
+	float: right; 
+}
+
+.link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
+}
