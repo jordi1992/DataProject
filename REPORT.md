@@ -2,15 +2,15 @@
 
 ## Inleiding
 
-Mijn visualisatie gaat over automerken want over automerken is er heel veel te vertellen
+Mijn visualisatie gaat over automerken want over automerken is er heel veel te vertellen.
 In deze visualisatie kun je zien waar welk automerk vandaan komt, het land van oorsprong dus.
-Daarnaast zijn de onderlinge relaties tussen automerken ook uitgebeeld. Denk hierbij aan welk
+Daarnaast zijn de onderlinge relaties tussen automerken ook uitgebeeld. Denk hierbij aan welke
 autogroep welke andere automerken bezitten (Zoals Volkswagen bijvoorbeeld Skoda bezit). Als laatste
 is er ook nog een grote grafiek te zien waarin per jaar wordt aangegeven hoeveel modellen elk automerk
 in totaal heeft uitgebracht in dat jaar. De bedoeling is dat deze visualisatie meer inzicht geeft voor gebruikers
-die weinig of zelfs niets van automerken af weten en toch graag zijn of haar kennis wil uitbreiden.
+die weinig of zelfs niets van automerken af weten en toch graag zijn of haar kennis wilt uitbreiden.
 Ook is het voor ervaren gebruikers die bijvoorbeeld in deze branche werken gemakkelijk te zien hoe het ook alweer zat
-met bijvoorbeel welk automerk er bij welke autogroep hoort.
+met bijvoorbeeld welk automerk er bij welke autogroep hoort.
 
 
 ## Technisch Design
